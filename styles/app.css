@@ -27,3 +27,10 @@ button:hover {
 .hand {
   overflow: auto;
 }
+
+.winnerMessage {
+  font-size: 2em;
+  color: white;
+  font-weight: bold;
+  margin-left: 2em;
+}
