@@ -6,8 +6,7 @@ class window.Game extends Backbone.Model
     @get('playerHand').on('stand', @compareHands, @)
 
   isBust: (hand)->
-    if hand.minScore() > 21
-      true
+    if hand.minScore() > 21 then true else false
 
   checkPlayersHand: ->
     if @isBust @get 'playerHand'
@@ -31,7 +30,9 @@ class window.Game extends Backbone.Model
     dealerHand = @get 'dealerHand'
     score1 = dealerHand.scores()[0]
     score2 = dealerHand.scores()[1]
-    if score1 < 16 and (score2 < 16 or score2 > 21)
+    console.log(score1, score2)
+    console.log @get 'dealerHand'
+    if score1 < 17 and (score2 < 17 or score2 > 21)
       dealerHand.hit()
       @dealerHit()
 
@@ -40,12 +41,15 @@ class window.Game extends Backbone.Model
 
   playerWins: ->
     console.log 'player wins'
+    @set 'winner', 'player'
 
   dealerWins: ->
     console.log 'dealer wins'
+    @set 'winner', 'dealer'
 
   tieScore: ->
     console.log 'tie game'
+    @set 'winner', 'tie'
 
     # RULES
     # reveal dealer's card
