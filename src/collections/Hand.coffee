@@ -5,8 +5,10 @@ class window.Hand extends Backbone.Collection
     # todo
 
   hit: ->
-    @add(@deck.pop())
+    newCard = @deck.pop()
+    @add newCard
     @trigger 'hit', @
+    newCard
 
   stand: ->
     @trigger 'stand', @
