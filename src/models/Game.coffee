@@ -19,9 +19,9 @@ class window.Game extends Backbone.Model
     @dealerHit()
     if @isBust @get 'dealerHand'
       @playerWins()
-    else if @bestScore(@get('playerHand')) > @bestScore(@get('dealerHand'))
+    else if @get('playerHand').bestScore() > @get('dealerHand').bestScore()
       @playerWins()
-    else if @bestScore(@get('playerHand')) == @bestScore(@get('dealerHand'))
+    else if @get('playerHand').bestScore() == @get('dealerHand').bestScore()
       @tieScore()
     else
       @dealerWins()
@@ -36,9 +36,6 @@ class window.Game extends Backbone.Model
       dealerHand.hit()
       @dealerHit()
 
-  bestScore: (hand)->
-     if hand.scores()[1] > 21 then hand.scores()[0] else hand.scores()[1]
-
   playerWins: ->
     console.log 'player wins'
     @set 'winner', 'player'
@@ -51,8 +48,3 @@ class window.Game extends Backbone.Model
     console.log 'tie game'
     @set 'winner', 'tie'
 
-    # RULES
-    # reveal dealer's card
-    # if dealer's score < 17, dealer hits
-    # if dealers score > 21 or < players score, dealer loses / player wins
-    # else dealer wins
