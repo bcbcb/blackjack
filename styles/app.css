@@ -1,12 +1,31 @@
+body {
+  font-family: Helvetica;
+  margin: 20px;
+  background-color: #363;
+}
+
+button {
+  font-size: 1.5em;
+  font-family: Helvetica;
+  padding: 0.5em 2em;
+  border-radius: 10px;
+  border: none;
+  background-color: #ccc;
+}
+button:hover {
+  background-color: #eee;
+}
+
 .card {
   float: left;
   border: solid 1px black;
-  width: 100px;
   border-radius: 5px;
-  height: 140px;
   margin-right: 20px;
 }
 
+.covered {
+  opacity: 0.2;
+}
 .covered {
   background-color: black;
 }
