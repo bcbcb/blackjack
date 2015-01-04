@@ -32,7 +32,7 @@ class window.Game extends Backbone.Model
     score2 = dealerHand.scores()[1]
     if score1 < 17 and (score2 < 17 or score2 > 21)
       dealerHand.hit()
-      @dealerHit()
+      setTimeout(@dealerHit.bind(@),1200)
 
   playerWins: ->
     @set 'winnerMessage', 'Player Wins!'

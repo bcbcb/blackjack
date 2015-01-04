@@ -1,18 +1,24 @@
 class window.CardView extends Backbone.View
   className: 'card'
 
-  template: _.template '<img src="img/cards/<%= rankName %>-<%= suitName %>.png" />'
+  template: _.template '
+    <div class="card-container">
+      <div class="front">
+        <img src="img/cards/<%= rankName %>-<%= suitName %>.png" />
+      </div>
+      <div class="back">
+        <img src="img/card-back.png" />
+      </div>
+    </div>
+    '
 
   initialize: ->
     @render()
+    @model.on('change:revealed', @flipCard, @)
 
   render: ->
     @$el.children().detach()
-    if not @model.get 'revealed'
-        @$el.html '<img src="img/card-back.png" />'
-        @model.on('change:revealed', @flipCard, @)
-    else
-      @$el.html @template @model.attributes
+    @$el.html @template @model.attributes
     @$el
       .css
         'position': 'relative'
@@ -20,9 +26,8 @@ class window.CardView extends Backbone.View
       .animate
         'left': '0px'
         , 500
+    if @model.get('revealed')
+      setTimeout(@flipCard.bind(@), 600)
 
   flipCard: ->
-    @$el.css
-      'transform': 'rotateX(720deg)'
-      'transition': '1s'
-    @$el.html @template @model.attributes
+    @$el.find('.card-container').addClass('flipper')

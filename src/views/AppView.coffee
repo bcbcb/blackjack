@@ -23,7 +23,9 @@ class window.AppView extends Backbone.View
     @render()
     @model.get('game').on('change:winner'
      ->
-      @$('.buttons-container').html @gameOverTemplate(@model.get('game').attributes)
+      setTimeout =>
+          @$('.buttons-container').html( @gameOverTemplate(@model.get('game').attributes) )
+        , 1200
      @)
 
   initialize: ->
