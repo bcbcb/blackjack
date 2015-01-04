@@ -4,6 +4,8 @@ class window.Game extends Backbone.Model
     @set 'dealerHand', deck.dealDealer()
     @get('playerHand').on('hit', @checkPlayersHand, @)
     @get('playerHand').on('stand', @compareHands, @)
+    @set 'winnerMessage', 'stop spamming'
+
 
   isBust: (hand)->
     if hand.minScore() > 21 then true else false
@@ -32,7 +34,7 @@ class window.Game extends Backbone.Model
     score2 = dealerHand.scores()[1]
     if score1 < 17 and (score2 < 17 or score2 > 21)
       dealerHand.hit()
-      setTimeout(@dealerHit.bind(@),1200)
+      @dealerHit()
 
   playerWins: ->
     @set 'winnerMessage', 'Player Wins!'

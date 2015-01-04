@@ -5,8 +5,7 @@ class window.HandView extends Backbone.View
 
   initialize: ->
     @collection.on 'add remove', @renderCard, @
-    # @collec
-    # tion.on 'change:revealed', @render, @
+    @collection.on 'change', @renderScore, @
     @render()
 
   render: ->
@@ -18,6 +17,9 @@ class window.HandView extends Backbone.View
 
   renderCard: ->
     @$el.append(new CardView(model: @collection.at(@collection.length-1)).$el )
+    @renderScore()
+
+  renderScore: ->
     setTimeout ( =>
       @$('.score').text @collection.bestScore()
-      ), 1200
+      ), 800
